@@ -50,7 +50,11 @@ dsh plugin --profile web add @deepwhale-cn/dsh-agent-scope
 npx @deepwhale-cn/dsh-agent-scope
 ```
 
-![dsh-agent-scope 的检查报告示例](https://www.deepwhale.org.cn/plugin-assets/dsh-agent-scope/report.png)
+![dsh-agent-scope 检查报告示例](https://www.deepwhale.org.cn/plugin-assets/dsh-agent-scope/report.png)
+
+![dsh-agent-scope 演示模式输出](https://www.deepwhale.org.cn/plugin-assets/dsh-agent-scope/demo.png)
+
+![dsh-agent-scope 规则与依据](https://www.deepwhale.org.cn/plugin-assets/dsh-agent-scope/rules.png)
 
 ## 用法
 
