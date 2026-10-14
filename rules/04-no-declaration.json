@@ -1,0 +1,15 @@
+{
+  "id": "SCOPE-NO-DECLARATION",
+  "title": "Agent 配置里找不到权限声明",
+  "severity": "medium",
+  "source": "MCP 官方文档 · Server 能力声明；最小权限原则 —— 权限应显式声明而非默认全开",
+  "advice": "这是 Agent/MCP 的配置文件，但里面**找不到任何权限声明**（工具白名单、可访问目录、网络范围）。**没有声明通常等于默认全开** —— 而用户看到的是一个「配置很干净」的文件，不会意识到 agent 能做所有事。建议显式写出权限边界。",
+  "check": {
+    "type": "files-lack",
+    "pattern": "allowedTools|allowed_tools|toolPermissions|allowedPaths|allowed_paths|allowedDomains|allowed_domains|permissions|沙箱|sandbox|allowlist|whitelist",
+    "flags": "i",
+    "paths": ["**/mcp*.json", "**/*mcp*.json", "**/claude_desktop_config.json", "**/.mcp.json", "**/settings.json", "**/agent*.json", "**/*.agent.json"],
+    "when": "mcpServers|allowedTools|tools|agent|command",
+    "evidence": "Agent/MCP 配置里找不到任何权限声明"
+  }
+}

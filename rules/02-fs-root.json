@@ -1,0 +1,14 @@
+{
+  "id": "SCOPE-FS-ROOT",
+  "title": "Agent 文件访问范围是根目录或整个用户目录",
+  "severity": "high",
+  "source": "MCP 官方文档 · Server 部署建议（限制可访问目录）；最小权限原则 —— 文件系统访问应限定在必要目录",
+  "advice": "Agent 的文件访问路径指向 `/`、`~`、`C:\\\\` 或整个用户目录 —— 意味着它能读写**你所有的文件**（包括 ~/.ssh、~/.aws、浏览器数据）。这些正是凭据最集中的地方。改为只开放项目目录，并且是只读优先。",
+  "check": {
+    "type": "file-pattern",
+    "pattern": "(args|command|path|paths|root|rootPath|root_path|allowedPaths|allowed_paths)[\"']?\\s*[:=]\\s*\\[[^\\]]*[\"'](\\/|~|\\/Users\\/[^\"'\\/]*|C:\\\\\\\\?|\\$HOME)[\"']",
+    "flags": "g",
+    "paths": ["**/mcp*.json", "**/*mcp*.json", "**/claude_desktop_config.json", "**/.mcp.json", "**/settings.json", "**/agent*.json", "**/*.agent.json"],
+    "max": 20
+  }
+}

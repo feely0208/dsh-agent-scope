@@ -1,0 +1,4 @@
+# @deepwhale-cn/dsh-agent-scope 的组合层
+- insert:
+    - id: agent-scope
+      name: '@deepwhale-cn/dsh-agent-scope'

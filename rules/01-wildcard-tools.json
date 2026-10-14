@@ -1,0 +1,14 @@
+{
+  "id": "SCOPE-WILDCARD-TOOLS",
+  "title": "Agent 工具权限使用通配符",
+  "severity": "high",
+  "source": "MCP 官方文档 · 工具与权限模型；最小权限原则（NIST SP 800-53 AC-6）—— 只授予完成任务所必需的权限",
+  "advice": "Agent 的工具权限写成 `*` / `all` / `any` —— 意味着它能调用**所有**工具（读文件、执行命令、发网络请求）。Agent 的权限就是它的**爆炸半径**：一旦被提示注入控制，能做的事等于你给它的全部权限。改成白名单，只列真正需要的工具。",
+  "check": {
+    "type": "file-pattern",
+    "pattern": "(allowedTools|allowed_tools|tools|toolPermissions|permissions|allowedCapabilities)[\"']?\\s*[:=]\\s*\\[?\\s*[\"'](\\*|all|any|ALL)[\"']",
+    "flags": "gi",
+    "exts": [".js", ".mjs", ".cjs", ".ts", ".json", ".yml", ".yaml", ".toml", ".py"],
+    "max": 20
+  }
+}

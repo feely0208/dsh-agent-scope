@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "filesystem": { "command": "npx", "args": ["-y", "@modelcontextprotocol/server-filesystem", "/"] },
+    "everything": { "command": "npx", "args": ["-y", "mcp-everything"], "allowedTools": ["*"] },
+    "net": { "command": "npx", "args": ["-y", "mcp-net"], "allowedDomains": "*" }
+  }
+}

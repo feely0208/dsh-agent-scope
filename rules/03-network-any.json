@@ -1,0 +1,14 @@
+{
+  "id": "SCOPE-NET-ANY",
+  "title": "Agent 网络访问无限制",
+  "severity": "medium",
+  "source": "OWASP Top 10 for LLM Applications — LLM06 Excessive Agency：应限制智能体可访问的资源与网络范围；MCP 官方文档",
+  "advice": "Agent 的网络访问没有限制（无白名单、允许任意出站）—— 意味着被注入后可以把你的数据发到任意外部地址，或读取内网服务。OWASP 把这归为 **LLM06 Excessive Agency**。建议：出站域名白名单 + 禁止访问内网网段。",
+  "check": {
+    "type": "file-pattern",
+    "pattern": "(allowedDomains|allowed_domains|networkAccess|network_access|allowNetwork|allow_network|egress)[\"']?\\s*[:=]\\s*[\"']?(\\*|all|any|true|unrestricted)",
+    "flags": "gi",
+    "exts": [".js", ".mjs", ".cjs", ".ts", ".json", ".yml", ".yaml", ".toml"],
+    "max": 20
+  }
+}

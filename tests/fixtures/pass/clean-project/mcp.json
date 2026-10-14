@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem@2024.11.0", "./src"],
+      "allowedTools": ["read_file", "list_directory"],
+      "allowedPaths": ["./src", "./docs"],
+      "allowedDomains": ["api.internal.example.cn"],
+      "sandbox": true
+    }
+  }
+}
