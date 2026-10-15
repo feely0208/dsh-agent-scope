@@ -1,0 +1,60 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0d0f13; display:flex; justify-content:center;
+         align-items:flex-start; padding:22px; font-family:-apple-system,"PingFang SC",
+         "Helvetica Neue",sans-serif; }
+  .win { width:1180px; border-radius:11px; overflow:hidden;
+          box-shadow:0 14px 44px rgba(0,0,0,.55); }
+  .bar { background:#2a2d34; padding:11px 15px; display:flex; align-items:center; gap:9px; }
+  .dot { width:12px; height:12px; border-radius:50%; }
+  .t { margin-left:11px; color:#7a8290; font-size:13px; letter-spacing:.02em; }
+  .term { background:#1b1d22; padding:20px 22px 24px; font-family:"SF Mono",Menlo,Consolas,
+           "PingFang SC",monospace; font-size:13.5px; line-height:1.72; }
+  .cmd { color:#5ee08a; margin-bottom:13px; font-size:13.5px; }
+  .cmd b { color:#fff; font-weight:600; }
+  .l { white-space:pre-wrap; word-break:break-word; }
+</style></head><body>
+  <div class="win">
+    <div class="bar">
+      <span class="dot" style="background:#ff5f57"></span>
+      <span class="dot" style="background:#febc2e"></span>
+      <span class="dot" style="background:#28c840"></span>
+      <span class="t">dsh-agent-scope · demo</span>
+    </div>
+    <div class="term">
+      <div class="cmd">$ <b>dsh-agent-scope --demo</b></div>
+      <div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#d8dee9">  【演示模式】使用内置样本，不是你的真实项目。</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#d8dee9">  深鲸守护 · Agent 权限边界 v0.1.0</span></div>
+<div class="l"><span style="color:#d8dee9">  ──────────────────────────────────────────────────────────────────</span></div>
+<div class="l"><span style="color:#d8dee9">  扫描范围   内置演示样本 · 故意有问题的项目</span></div>
+<div class="l"><span style="color:#d8dee9">             2 个文件 · 0 个目录已跳过</span></div>
+<div class="l"><span style="color:#d8dee9">  检查规则   4/4 条</span></div>
+<div class="l"><span style="color:#ffd166">  命中       3 条</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#ff6b6b">  【高】2 条</span></div>
+<div class="l"><span style="color:#7a8290">    · Agent 工具权限使用通配符</span></div>
+<div class="l"><span style="color:#d8dee9">      位置  mcp.json:4</span></div>
+<div class="l"><span style="color:#7a8290">      证据  allowedTools&quot;: [&quot;*&quot;</span></div>
+<div class="l"><span style="color:#7a8290">      依据  MCP 官方文档 · 工具与权限模型；最小权限原则（NIST SP 800-53 AC-6）—— 只授予完成任务所必需的权限</span></div>
+<div class="l"><span style="color:#d8dee9">      建议  Agent 的工具权限写成 `*` / `all` / `any` —— 意味着它能调用**所有**工具（读文件、执行命令、发网络请求）。Agent 的权限就是它的**爆炸半径**：一旦被提示注入控制，能做的事等于你给它的全部权限。改成白名单，只列真正需要的工具。</span></div>
+<div class="l"><span style="color:#7a8290">    · Agent 文件访问范围是根目录或整个用户目录</span></div>
+<div class="l"><span style="color:#d8dee9">      位置  mcp.json:3</span></div>
+<div class="l"><span style="color:#7a8290">      证据  args&quot;: [&quot;-y&quot;, &quot;@modelcontextprotocol/server-filesystem&quot;, &quot;/&quot;</span></div>
+<div class="l"><span style="color:#7a8290">      依据  MCP 官方文档 · Server 部署建议（限制可访问目录）；最小权限原则 —— 文件系统访问应限定在必要目录</span></div>
+<div class="l"><span style="color:#d8dee9">      建议  Agent 的文件访问路径指向 `/`、`~`、`C:\\` 或整个用户目录 —— 意味着它能读写**你所有的文件**（包括 ~/.ssh、~/.aws、浏览器数据）。这些正是凭据最集中的地方。改为只开放项目目录，并且是只读优先。</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#ffd166">  【中】1 条</span></div>
+<div class="l"><span style="color:#7a8290">    · Agent 网络访问无限制</span></div>
+<div class="l"><span style="color:#d8dee9">      位置  mcp.json:5</span></div>
+<div class="l"><span style="color:#7a8290">      证据  allowedDomains&quot;: &quot;*</span></div>
+<div class="l"><span style="color:#7a8290">      依据  OWASP Top 10 for LLM Applications — LLM06 Excessive Agency：应限制智能体可访问的资源与网络范围；MCP 官方文档</span></div>
+<div class="l"><span style="color:#d8dee9">      建议  Agent 的网络访问没有限制（无白名单、允许任意出站）—— 意味着被注入后可以把你的数据发到任意外部地址，或读取内网服务。OWASP 把这归为 **LLM06 Excessive Agency**。建议：出站域名白名单 + 禁止访问内网网段。</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#d8dee9">  ──────────────────────────────────────────────────────────────────</span></div>
+    </div>
+  </div>
+</body></html>
