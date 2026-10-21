@@ -1,5 +1,7 @@
 # @deepwhale-cn/dsh-agent-scope
 
+[![dshfind 收录](https://dshfind.com/api/badge/feely0208/dsh-agent-scope?lang=zh)](https://dshfind.com/zh/plugins/feely0208/dsh-agent-scope)
+
 **Agent 权限边界** —— 查 agent 的工具/文件/网络权限有没有声明、是不是过宽。
 
 ## 不装它会怎样
